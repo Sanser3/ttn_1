@@ -17,5 +17,7 @@ public class Customers {
     private Integer id;
     private String name;
     private String address;
+    private String accessKey;
+    @Column(updatable = false)
     private LocalDateTime dateVisit;
 }

@@ -1,27 +1,23 @@
 package e41.ttn_1.service.converter;
 
 import e41.ttn_1.dto.CustomerRequest;
-import e41.ttn_1.dto.CustomerResponse;
 import e41.ttn_1.entity.Customers;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Component
+@Service
+@Data
+@AllArgsConstructor
 public class CustomerConverter {
-    public CustomerResponse toResponseDTO(Customers customers){
-        CustomerResponse customerResponse = new CustomerResponse();
-        customerResponse.setId(customers.getId());
-        customerResponse.setName(customers.getName());
-        customerResponse.setAddress(customers.getAddress());
-        return customerResponse;
-    }
-
-    public Customers toEntity(CustomerRequest dto){
-        Customers customers = new Customers();
-        customers.setName(dto.getName());
-        customers.setAddress(dto.getAddress());
-        customers.setDateVisit(LocalDateTime.now());
-        return customers;
+    public Customers converterRequestToCustomer(CustomerRequest customerRequest){
+        Customers newCustomer = new Customers();
+        newCustomer.setName(customerRequest.getName());
+        newCustomer.setAddress(customerRequest.getAddress());
+        newCustomer.setAccessKey(String.valueOf((customerRequest.getName()+customerRequest.getAddress()).hashCode()));
+        newCustomer.setDateVisit(LocalDateTime.now());
+        return newCustomer;
     }
 }

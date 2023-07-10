@@ -41,7 +41,7 @@ public class UserController {
         if (users != null){
             return userConverter.toResponseDTO(users);
         } else {
-            return new UserResponse(-1,"User not found");
+            return new UserResponse(-1,"User not found", "0");
         }
     }
 
@@ -50,9 +50,9 @@ public class UserController {
         Users searchResult = userRepository.findById(id).orElse(null);
         if (searchResult != null){
             userRepository.deleteById(id);
-            return new UserResponse(id, "User delete successful");
+            return new UserResponse(id, "User delete successful", searchResult.getAccessKey());
         } else {
-            return new UserResponse(-1,"User not found");
+            return new UserResponse(-1,"User not found", "0");
         }
     }
 

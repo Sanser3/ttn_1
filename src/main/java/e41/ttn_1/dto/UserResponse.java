@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
     private Integer id;
     private String username;
+    private String accessKey;
 }

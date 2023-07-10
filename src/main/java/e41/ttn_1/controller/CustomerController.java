@@ -1,37 +1,32 @@
 package e41.ttn_1.controller;
 
-import e41.ttn_1.dto.CustomerRequest;
 import e41.ttn_1.dto.CustomerResponse;
-import e41.ttn_1.entity.Customers;
-import e41.ttn_1.repository.CustomerRepository;
-import e41.ttn_1.service.converter.CustomerConverter;
+import e41.ttn_1.dto.CustomerRequest;
+import e41.ttn_1.dto.FindAllCustomerResponse;
+import e41.ttn_1.service.customers.AddNewCustomerService;
+import e41.ttn_1.service.customers.FindAllCustomerService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/customers")
 @AllArgsConstructor
 public class CustomerController {
-    private final CustomerRepository customerRepository;
-    private final CustomerConverter customerConverter;
+    private final AddNewCustomerService addNewCustomerService;
+    private final FindAllCustomerService findAllCustomerService;
 
     @GetMapping
-    public List<CustomerResponse> getAllCustomers(){
-        List<Customers> customersList = customerRepository.findAll();
-        return customersList.stream()
-                .map(customerConverter::toResponseDTO)
-                .collect(Collectors.toList());
+    public ResponseEntity<FindAllCustomerResponse> getAllCustomer(){
+        FindAllCustomerResponse response = findAllCustomerService.findAllCustomerRequest();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping
-    public CustomerResponse createCustomer(@RequestBody CustomerRequest customerRequest){
-        Customers customers = customerConverter.toEntity(customerRequest);
-        Customers saveCustomers = customerRepository.save(customers);
-        return customerConverter.toResponseDTO(saveCustomers);
+    public ResponseEntity<CustomerResponse> addNewCustomer(@RequestBody CustomerRequest request){
+        CustomerResponse response = addNewCustomerService.createCustomer(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    public List<CustomerResponse> findByNameAndAddress()
 }
