@@ -1,4 +1,4 @@
-package e41.ttn_1.dto;
+package e41.ttn_1.dto.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
-    private String username;
+    private String name;
     private String password;
 }
