@@ -1,6 +1,6 @@
 package e41.ttn_1.controller;
 
-import e41.ttn_1.dto.CustomerResponse;
+import e41.ttn_1.dto.customers.CustomerResponse;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

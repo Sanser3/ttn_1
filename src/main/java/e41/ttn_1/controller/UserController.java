@@ -1,64 +1,43 @@
 package e41.ttn_1.controller;
 
 
-import e41.ttn_1.dto.UserRequest;
-import e41.ttn_1.dto.UserResponse;
-import e41.ttn_1.entity.Users;
-import e41.ttn_1.repository.UserRepository;
-import e41.ttn_1.service.converter.UserConverter;
+import e41.ttn_1.dto.users.UserRequest;
+import e41.ttn_1.dto.users.UserResponse;
+import e41.ttn_1.service.users.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
-    private final UserConverter userConverter;
+    private final UserService userService;
 
     @GetMapping
-    public List<UserResponse> getAllUsers(){
-        List<Users> users = userRepository.findAll();
-        return users.stream()
-                .map(userConverter::toResponseDTO)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<UserResponse>> findAllUser(){
+        List<UserResponse> responses = userService.getAllUsers();
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
     @PostMapping
-    public UserResponse createUser(@RequestBody UserRequest userRequest){
-        Users users = userConverter.toEntity(userRequest);
-        Users saveUsers = userRepository.save(users);
-        return userConverter.toResponseDTO(saveUsers);
-
+    public ResponseEntity<UserResponse> addNewUser(@RequestBody UserRequest request){
+        UserResponse response = userService.createUser(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public UserResponse getUserById(@PathVariable Integer id){
-        Users users = userRepository.findById(id).orElse(null);
-        if (users != null){
-            return userConverter.toResponseDTO(users);
-        } else {
-            return new UserResponse(-1,"User not found", "0");
-        }
+    public ResponseEntity<UserResponse> findUserById(@PathVariable Integer id){
+        UserResponse response = userService.getUserById(id);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public UserResponse deleteUserById(@PathVariable Integer id){
-        Users searchResult = userRepository.findById(id).orElse(null);
-        if (searchResult != null){
-            userRepository.deleteById(id);
-            return new UserResponse(id, "User delete successful", searchResult.getAccessKey());
-        } else {
-            return new UserResponse(-1,"User not found", "0");
-        }
+    public ResponseEntity<UserResponse> deleteUserById(@PathVariable Integer id){
+        UserResponse response = userService.deleteUserById(id);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
-//    @GetMapping("/{nameandadress}")
-//    public UserResponse getUserByNameAndAddress(@PathVariable String name, String address){
-//
-//        return new UserResponse();
-//    }
 }

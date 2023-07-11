@@ -1,4 +1,4 @@
-package e41.ttn_1.dto;
+package e41.ttn_1.dto.customers;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerResponse {
-    private Integer id;
+public class CustomerRequest {
     private String name;
     private String address;
-    private String accessKey;
-    private String responseMessage;
+    private String route;
 }

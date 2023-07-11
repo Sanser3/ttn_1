@@ -1,4 +1,4 @@
-package e41.ttn_1.dto;
+package e41.ttn_1.dto.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponse {
     private Integer id;
-    private String username;
+    private String name;
+    private String password;
     private String accessKey;
 }
