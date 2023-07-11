@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,4 +16,5 @@ public class CustomerResponse {
     private String address;
     private String route;
     private String accessKey;
+    private LocalDate dateVisit;
 }

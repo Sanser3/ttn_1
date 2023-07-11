@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -28,5 +29,5 @@ public class Customers {
     private String route;
     private String accessKey;
     @Column(updatable = false)
-    private LocalDateTime dateVisit;
+    private LocalDate dateVisit;
 }
