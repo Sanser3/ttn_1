@@ -21,4 +21,5 @@ public class FindAllTtnService {
         List<Ttns> ttns = ttnRepository.findAll();
         return ttns.stream().map(ttnConverter::toResponse).collect(Collectors.toList());
     }
+
 }

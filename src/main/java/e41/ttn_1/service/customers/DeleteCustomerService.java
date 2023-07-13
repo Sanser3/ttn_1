@@ -1,6 +1,5 @@
 package e41.ttn_1.service.customers;
 
-import e41.ttn_1.converter.CustomerConverter;
 import e41.ttn_1.dto.customers.CustomerRequest;
 import e41.ttn_1.dto.customers.CustomerResponse;
 import e41.ttn_1.entity.Customers;

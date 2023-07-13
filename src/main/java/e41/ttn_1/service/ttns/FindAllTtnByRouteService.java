@@ -8,20 +8,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Data
 @AllArgsConstructor
-public class FindAllTtnByDateService {
+public class FindAllTtnByRouteService {
     private final TtnRepository ttnRepository;
     private final TtnConverter ttnConverter;
-    public List<TtnResponse> findAllByDateTtn(LocalDate date){
-        List<Ttns> ttns = ttnRepository.findTtnsByCreateTtn(date);
-//        List<Ttns> ttns = ttnRepository.findAll();
-        return ttns.stream().map(ttnConverter::toResponse).collect(Collectors.toList());
 
+    public List<TtnResponse> findAllByRoute(String route){
+        List<Ttns> ttns = ttnRepository.findAll().stream()
+                .filter(ttns1 -> ttns1.getCustomers().getRoute().equals(route))
+                .toList();
+        return ttns.stream().map(ttnConverter::toResponse).collect(Collectors.toList());
     }
 }

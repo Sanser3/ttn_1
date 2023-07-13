@@ -20,7 +20,7 @@ public class FindAllCustomerByRouteService {
 
     public List<CustomerResponse> findAllByRouteCustomer(String route){
         List<Customers> customers = customerRepository.findAllByRoute(route)
-                .orElseThrow(() -> new IllegalAccessError("User not found"));
+                .orElseThrow(() -> new IllegalAccessError("Customer not found"));
         return customers.stream()
                 .map(customerConverter::toResponse)
                 .collect(Collectors.toList());

@@ -4,6 +4,7 @@ import e41.ttn_1.dto.ttns.TtnRequest;
 import e41.ttn_1.dto.ttns.TtnResponse;
 import e41.ttn_1.service.ttns.AddTtnService;
 import e41.ttn_1.service.ttns.FindAllTtnByDateService;
+import e41.ttn_1.service.ttns.FindAllTtnByRouteService;
 import e41.ttn_1.service.ttns.FindAllTtnService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class TtnController {
     private final FindAllTtnService findAllTtnService;
     private final AddTtnService addTtnService;
     private final FindAllTtnByDateService findAllTtnByDateService;
+    private final FindAllTtnByRouteService findAllTtnByRouteService;
 
     @GetMapping
     public ResponseEntity<List<TtnResponse>> getAllTtn(){
@@ -33,10 +35,15 @@ public class TtnController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{date}")
-    public ResponseEntity<List<TtnResponse>> getAllTtnByDate(LocalDate date){
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<TtnResponse>> getAllTtnByDate(@PathVariable LocalDate date){
         List<TtnResponse> responses = findAllTtnByDateService.findAllByDateTtn(date);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
+    @GetMapping("/route/{route}")
+    public ResponseEntity<List<TtnResponse>> getAllTtnByRoute(@PathVariable String route){
+        List<TtnResponse> responses = findAllTtnByRouteService.findAllByRoute(route);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
+    }
 }
