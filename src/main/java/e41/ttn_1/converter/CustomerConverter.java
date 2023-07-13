@@ -8,7 +8,6 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Service
 @Data
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 public class CustomerConverter {
     public Customers toCustomer(CustomerRequest customerRequest){
         return new Customers(0,customerRequest.getName(), customerRequest.getAddress(), customerRequest.getRoute(),
-                String.valueOf((customerRequest.getName()+customerRequest.getAddress()).hashCode()),
+                String.valueOf((customerRequest.getName()+customerRequest.getAddress()+customerRequest.getRoute()).hashCode()),
                 LocalDate.now());
     }
 

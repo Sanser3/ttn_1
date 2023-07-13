@@ -1,5 +1,7 @@
-package e41.ttn_1.dto.customers;
+package e41.ttn_1.dto.ttns;
 
+import e41.ttn_1.entity.Customers;
+import e41.ttn_1.entity.Orders;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +11,10 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerResponse {
+public class TtnResponse {
     private Integer id;
-    private String name;
-    private String address;
-    private String route;
+    private Customers customer;
+    private Orders order;
     private String accessKey;
-    private LocalDate dateVisit;
+    private LocalDate dateCreate;
 }

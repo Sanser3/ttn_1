@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customers, Integer> {
     public Optional<Customers> findByNameAndAddressAndRoute(String name, String address, String route);
+    public Customers findCustomerByNameAndAddressAndRoute(String name, String address, String route);
     public Optional<Customers> findByAccessKey(String accessKey);
     public Optional<List<Customers>> findAllByRoute(String route);
 

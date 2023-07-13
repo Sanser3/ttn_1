@@ -10,7 +10,6 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Service
 @Data
@@ -21,7 +20,7 @@ public class UpdateCustomerService {
 
     public CustomerResponse updateCustomer(CustomerRequest request){
         Customers customerFourUpdate = customerRepository.findByAccessKey(request.getAccessKey())
-                .orElseThrow(() -> new IllegalAccessError("User not found"));
+                .orElseThrow(() -> new IllegalAccessError("Customer not found"));
 
         customerFourUpdate = customerConverter.updateCustomer(request, customerFourUpdate);
         customerRepository.save(customerFourUpdate);

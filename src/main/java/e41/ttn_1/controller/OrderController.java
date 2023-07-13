@@ -19,13 +19,13 @@ public class OrderController {
     private final FindAllOrderService findAllOrderService;
 
     @GetMapping
-    public ResponseEntity<List<OrderResponse>> getAllCustomer(){
+    public ResponseEntity<List<OrderResponse>> getAllOrder(){
         List<OrderResponse> response = findAllOrderService.findAllOrderRequest();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> addNewCustomer(@RequestBody OrderRequest request){
+    public ResponseEntity<OrderResponse> addNewOrder(@RequestBody OrderRequest request){
         OrderResponse response = addOrderService.createOrder(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

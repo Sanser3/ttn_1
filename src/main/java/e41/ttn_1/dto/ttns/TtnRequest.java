@@ -1,15 +1,18 @@
-package e41.ttn_1.dto.users;
+package e41.ttn_1.dto.ttns;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-    private Integer id;
+public class TtnRequest {
     private String name;
-    private String password;
+    private String address;
+    private String route;
     private String accessKey;
+    private List<Integer> orders;
 }
