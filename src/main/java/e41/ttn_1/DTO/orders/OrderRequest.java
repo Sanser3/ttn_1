@@ -1,4 +1,4 @@
-package e41.ttn_1.dto.ttns;
+package e41.ttn_1.DTO.orders;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TtnRequest {
-    private String name;
-    private String address;
-    private String route;
-    private String accessKey;
+public class OrderRequest {
     private List<Integer> orders;
 }

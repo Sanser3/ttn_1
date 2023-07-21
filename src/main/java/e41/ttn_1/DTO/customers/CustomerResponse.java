@@ -1,15 +1,19 @@
-package e41.ttn_1.dto.customers;
+package e41.ttn_1.DTO.customers;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerRequest {
+public class CustomerResponse {
+    private Integer id;
     private String name;
     private String address;
     private String route;
     private String accessKey;
+    private LocalDate dateVisit;
 }

@@ -1,7 +1,7 @@
 package e41.ttn_1.converter;
 
-import e41.ttn_1.dto.customers.CustomerRequest;
-import e41.ttn_1.dto.customers.CustomerResponse;
+import e41.ttn_1.DTO.customers.CustomerRequest;
+import e41.ttn_1.DTO.customers.CustomerResponse;
 import e41.ttn_1.entity.Customers;
 import lombok.AllArgsConstructor;
 import lombok.Data;

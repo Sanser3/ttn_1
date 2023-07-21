@@ -1,17 +1,16 @@
 package e41.ttn_1.converter;
 
-import e41.ttn_1.dto.customers.CustomerRequest;
-import e41.ttn_1.dto.customers.CustomerResponse;
-import e41.ttn_1.dto.orders.OrderRequest;
-import e41.ttn_1.dto.orders.OrderResponse;
-import e41.ttn_1.dto.ttns.TtnRequest;
-import e41.ttn_1.dto.ttns.TtnResponse;
+import e41.ttn_1.DTO.customers.CustomerRequest;
+import e41.ttn_1.DTO.customers.CustomerResponse;
+import e41.ttn_1.DTO.orders.OrderRequest;
+import e41.ttn_1.DTO.orders.OrderResponse;
+import e41.ttn_1.DTO.ttns.TtnRequest;
+import e41.ttn_1.DTO.ttns.TtnResponse;
 import e41.ttn_1.entity.Customers;
 import e41.ttn_1.entity.Orders;
 import e41.ttn_1.entity.Ttns;
-import e41.ttn_1.service.customers.AddCustomerService;
-import e41.ttn_1.service.customers.FindCustomerByNameAndAddressAndRouteService;
-import e41.ttn_1.service.orders.AddOrderService;
+import e41.ttn_1.service.CustomerService;
+import e41.ttn_1.service.OrderService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,11 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class TtnConverter {
-    private AddCustomerService addCustomerService;
-    private CustomerConverter customerConverter;
-    private AddOrderService addOrderService;
-    private OrderConverter orderConverter;
-    private FindCustomerByNameAndAddressAndRouteService findCustomerByNameAndAddressAndRouteService;
+    private final CustomerService customerService;
+    private final OrderService orderService;
+
+    private final CustomerConverter customerConverter;
+    private final OrderConverter orderConverter;
     
     public TtnResponse toResponse(Ttns ttns){
         return new TtnResponse(ttns.getId(), ttns.getCustomers(), ttns.getOrders(), ttns.getAccessKey(), LocalDate.now());
@@ -38,10 +37,10 @@ public class TtnConverter {
                 String.valueOf((ttnRequest.getName()+ttnRequest.getAddress()+ttnRequest.getRoute()).hashCode()));
         OrderRequest orderRequest = new OrderRequest(ttnRequest.getOrders());
 
-        CustomerResponse customerResponse = findCustomerByNameAndAddressAndRouteService
+        CustomerResponse customerResponse = customerService
                 .findAndCreateCustomerByNameAndAddressAndRoute(customerRequest);
 
-        OrderResponse orderResponse = addOrderService.createOrder(orderRequest);
+        OrderResponse orderResponse = orderService.createOrder(orderRequest);
 
         return new Ttns(0, customerResponseToCustomer(customerResponse),
                 orderResponseToOrder(orderResponse),
