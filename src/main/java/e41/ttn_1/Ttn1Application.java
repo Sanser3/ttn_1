@@ -6,17 +6,21 @@ import e41.ttn_1.entity.Ttns;
 import e41.ttn_1.repository.CustomerRepository;
 import e41.ttn_1.repository.OrderRepository;
 import e41.ttn_1.repository.TtnRepository;
+//import e41.ttn_1.secutityII.Role;
+//import e41.ttn_1.secutityII.RoleRepository;
+//import e41.ttn_1.secutityII.User;
+//import e41.ttn_1.secutityII.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 @SpringBootApplication
 @EnableWebMvc
@@ -30,12 +34,20 @@ public class Ttn1Application {
     @Transactional
     CommandLineRunner commandLineRunner(
             // репозиторий для ролей ------------> добавить
+//            UserRepository userRepository,
+//            RoleRepository roleRepository,
+//            BCryptPasswordEncoder bCryptPasswordEncoder,
             CustomerRepository customerRepository,
             OrderRepository orderRepository,
             TtnRepository ttnRepository){
         return args -> {
             // сохраняем роли аутентификации
-
+//            userRepository.save(new User(1L,"admin",
+//                    bCryptPasswordEncoder.encode("adminpass"), new HashSet<>(1,1)));
+//            userRepository.save(new User(2L,"user",
+//                    bCryptPasswordEncoder.encode("userpass"), new HashSet<>()));
+//            roleRepository.save(new Role(1L, "ADMIN", new HashSet<>()));
+//            roleRepository.save(new Role(2L, "USER", new HashSet<>()));
             // сохраняем заказчика
             customerRepository.save(new Customers(1, "name", "address", "route", "1320906976",
                     LocalDate.now()));
@@ -54,4 +66,9 @@ public class Ttn1Application {
                     LocalDate.now()));
         };
     }
+//    @Bean
+//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
 }

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ttns")
+@RequestMapping("/api/ttns")
 @AllArgsConstructor
 public class TtnController {
     private final TtnService ttnService;
